@@ -165,11 +165,11 @@
     class Todos extends React.Component {
       addItem = (e) => {
         e.preventDefault()
-        this.props.store.dispatch(addTodoAction({
-          id: generateId(),
-          name: this.input.value,
-          complete: false
-        }))
+        API.saveTodo(this.input.value)
+          .then((todo) => {
+            this.props.store.dispatch(addTodoAction(todo))
+          })
+          .catch(() => alert('An error occured.'))
       }
 
       remove = (todo) => {
@@ -209,10 +209,11 @@
     class Goals extends React.Component {
       addItem = (e) => {
         e.preventDefault()
-        this.props.store.dispatch(addGoalAction({
-          id: generateId(),
-          name: this.input.value
-        }))
+        API.saveGoal(this.input.value)
+          .then((goal) => {
+            this.props.store.dispatch(addGoalAction(goal))
+          })
+          .catch(() => alert('An error occured.'))
       }
 
       remove = (goal) => {
