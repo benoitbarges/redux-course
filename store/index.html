@@ -257,8 +257,7 @@
         e.preventDefault()
         this.props.store.dispatch(addGoalAction({
           id: generateId(),
-          name: this.input.value,
-          complete: false
+          name: this.input.value
         }))
       }
 
