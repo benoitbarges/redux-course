@@ -227,10 +227,25 @@
     }
 
     class Todos extends React.Component {
+      addItem = (e) => {
+        e.preventDefault()
+        this.props.store.dispatch(addTodoAction({
+          id: generateId(),
+          name: this.input.value,
+          complete: false
+        }))
+      }
+
       render() {
         return (
           <div>
-            Todos
+            <h1>TODOS</h1>
+            <input
+              type="text"
+              placeholder="add todo"
+              ref={(input) => this.input = input}
+            />
+            <button onClick={this.addItem}>Add Todo</button>
             <List />
           </div>
         )
@@ -238,10 +253,25 @@
     }
 
     class Goals extends React.Component {
+      addItem = (e) => {
+        e.preventDefault()
+        this.props.store.dispatch(addGoalAction({
+          id: generateId(),
+          name: this.input.value,
+          complete: false
+        }))
+      }
+
       render() {
         return (
           <div>
-            Goals
+            <h1>GOALS</h1>
+            <input
+              type="text"
+              placeholder="add todo"
+              ref={(input) => this.input = input}
+            />
+            <button onClick={this.addItem}>Add Goals</button>
             <List />
           </div>
         )
@@ -252,15 +282,15 @@
       render() {
         return (
           <div>
-            <Todos />
-            <Goals />
+            <Todos store={this.props.store} />
+            <Goals store={this.props.store} />
           </div>
         )
       }
     }
 
     ReactDOM.render(
-      <App />, document.getElementById('app')
+      <App store={store} />, document.getElementById('app')
     )
   </script>
 </body>
